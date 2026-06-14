@@ -67,6 +67,15 @@ next: [next action]
 
 When spawning specialists, instruct them to write detailed findings to the phase artifact and return only a 1-3 line summary.
 
+## Gate Handling
+
+- If the user rejects a gate, stop and do not advance the phase.
+- Return to the prior phase needed to address the rejection.
+- Update `status.md` with the rejected gate, reason, current phase, and next action.
+- If verification fails, report the failure, do not mark the bug fixed, and do not commit.
+- After two failed fix/verification attempts, stop and escalate to the user.
+- Do not write secrets, tokens, credentials, PII, or customer data to artifacts. Redact as `[REDACTED]`.
+
 ## Phase 0: Gather
 
 Clarify:
@@ -110,6 +119,7 @@ Write `02-fix-plan.md` with:
 - root cause;
 - proposed fix;
 - files likely touched;
+- non-overlapping file ownership for any parallel editor dispatch;
 - blast radius;
 - rollback path;
 - verification plan.

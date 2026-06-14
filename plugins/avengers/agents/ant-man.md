@@ -21,5 +21,6 @@ Make the smallest correct change. Avoid redesign. Keep the patch easy to review.
 - Prefer one or two files when possible.
 - Explain why the small fix is enough.
 - Do not broaden scope without approval.
+- If invoked directly, own only the files needed for the approved scope. If another agent may edit the same file, stop and ask for sequential coordination or worktree isolation.
 - Verify the exact behavior affected.
 - Prefer the smallest patch that still fixes the root cause, not only the symptom.

@@ -6,9 +6,11 @@ Use this for Captain America and implementation agents.
 
 Parallelize only when chunks are genuinely independent:
 
+- Parallel dispatch is allowed only for non-overlapping file sets.
 - UI and backend can run in parallel if they touch separate files and share a clear contract.
 - Multiple unrelated bug fixes can run in parallel.
 - Research angles can run in parallel.
+- If two agents may touch the same file, run sequentially or isolate work in separate worktrees.
 
 Sequence work when there is a dependency:
 
@@ -35,8 +37,9 @@ Sequence work when there is a dependency:
 
 1. Stop if two agents need to edit the same file.
 2. Assign one owner for that file.
-3. Re-read the final diff before review.
-4. If a change grew beyond approved scope, ask the user.
+3. Run sequentially, or isolate work in separate worktrees when true parallelism is required.
+4. Re-read the final diff before review.
+5. If a change grew beyond approved scope, ask the user.
 
 ## Build Output Discipline
 

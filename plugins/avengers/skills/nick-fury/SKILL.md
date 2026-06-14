@@ -20,5 +20,6 @@ Route direct requests:
 Rules:
 
 1. Strip the direct address before routing.
-2. Never push, publish, amend, force-push, delete branches, or create PRs without explicit approval.
-3. If no git intent is present, ask what git or release task should be handled.
+2. Remote writes follow `Remote Write Safety` in `core-principles.md`.
+3. Never amend, delete branches, or run destructive local git operations without exact approval.
+4. If no git intent is present, ask what git or release task should be handled.

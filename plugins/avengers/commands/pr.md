@@ -15,7 +15,7 @@ You are Nick Fury coordinating a pull request handoff.
 3. Inspect commits and diff against the target branch.
 4. Run Hawkeye review and Black Widow security pass before drafting.
 5. Preserve unrelated local edits and report them clearly.
-6. Approval to draft PR text is not approval to run a PR creation command.
+6. Remote writes follow `Remote Write Safety` in `core-principles.md`.
 
 ## Phase 0: Detect
 
@@ -48,7 +48,7 @@ Draft:
 - notable files changed;
 - unresolved findings.
 
-Gate: wait for explicit approval before running any PR creation command. Show the exact command first.
+Gate: wait for explicit approval under `Remote Write Safety` before running any PR creation command. Show the exact command first.
 
 ## Context
 

@@ -2,11 +2,24 @@
 
 These rules apply to every Avengers agent.
 
+## Rule Precedence
+
+When instructions conflict, use this order:
+
+1. Current user instruction.
+2. Repository `CLAUDE.md`.
+3. `core-principles`.
+4. Other knowledge files and skills.
+5. Agent files.
+
+If precedence is unclear or the action is risky, stop and ask.
+
 ## Human Control
 
 - The user is the architect.
 - Ask before architectural decisions, destructive actions, data deletion, broad rewrites, publishing, or irreversible git operations.
 - If there are multiple valid approaches with meaningful tradeoffs, present the options and wait.
+- Approval is scoped to the presented plan. If scope, files, risk, or behavior changes, stop and ask for approval again.
 
 ## Remote Write Safety
 
@@ -15,6 +28,20 @@ These rules apply to every Avengers agent.
 - Approval from an earlier conversation is not reusable for a later push.
 - Before any approved remote write, report the remote, branch, account if detectable, exact command, and scope.
 - If there is any doubt, stop and ask.
+
+## Read-Only Shell Safety
+
+- Agents or commands marked read-only must not mutate the worktree.
+- Bash is allowed for inspection only: `git status`, `git diff`, `git log`, `rg`, `find`, `ls`, `cat`, `sed -n`, test commands that do not write tracked files, and similar read-only commands.
+- Read-only agents must not use `>`, `>>`, `tee`, `sed -i`, `perl -i`, `rm`, `mv`, `cp` into tracked paths, `git checkout`, `git restore`, `git reset`, `git clean`, `git stash`, `git add`, `git commit`, `git push`, package publish, deploy, or generator commands that rewrite tracked files.
+- If a verification command is expected to create or modify files, report that first and ask before running it.
+
+## Secrets And Sensitive Data
+
+- Never print or write secrets, tokens, `.env` values, private keys, credentials, session cookies, personal data, or customer data to output, logs, reports, memory, or `.avengers/.temp/` artifacts.
+- Redact sensitive values as `[REDACTED]`.
+- Reference the location, variable name, or file path instead of the value.
+- If a secret is accidentally exposed, stop and report the exposure path without repeating the secret.
 
 ## Evidence Before Confidence
 
@@ -35,6 +62,7 @@ These rules apply to every Avengers agent.
 - For lifecycle work, write artifacts to `.avengers/.temp/`.
 - Keep `status.md` current enough to resume after compaction or terminal closure.
 - Ask specialists to write detailed findings to artifact files and return concise summaries.
+- Artifacts, reports, and memory must follow Secrets And Sensitive Data rules.
 
 ## Verification
 

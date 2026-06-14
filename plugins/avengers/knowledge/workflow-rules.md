@@ -11,6 +11,7 @@
 - For non-trivial changes, present a short plan and wait for approval.
 - Include scope, files likely touched, verification, and rollback risk.
 - If the user asked for audit only, do not edit.
+- Approval is scoped to that plan. If scope, files, risk, or behavior changes, stop and ask again.
 
 ## Scope Discipline
 
@@ -21,10 +22,15 @@
 
 ## Remote Write Safety
 
-- All agents must treat remote writes as blocked by default.
-- Do not run `git push`, PR creation, release creation, deploy, or package publish commands unless the user explicitly approves that exact remote action in the current task.
-- Local edits, local tests, and local commits do not imply push permission.
-- Report the exact remote, branch, account if detectable, and command before any approved push or publish.
+Follow `Remote Write Safety` in `core-principles.md`. Do not duplicate or weaken that rule here.
+
+## Gate Handling
+
+- If a gate is rejected, stop and do not advance the phase.
+- Return to the prior phase needed to address the rejection.
+- Update `status.md` with the rejected gate, reason, current phase, and next action.
+- If tests or verification fail, report the failure, do not mark the task done, do not summarize as complete, and do not commit unless the user explicitly approves a follow-up fix or commit.
+- After two failed fix/verification attempts, stop and escalate to the user.
 
 ## Artifact Paths
 
@@ -41,6 +47,7 @@
 - `status.md` should include phase, status, summary, next action, and gate state.
 - On resume, read `status.md` before continuing.
 - Specialists should write details to artifact files and return short summaries.
+- Do not write secrets, tokens, credentials, PII, or customer data into artifacts. Redact values and reference only locations.
 
 ## Activity Logging
 

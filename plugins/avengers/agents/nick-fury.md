@@ -19,6 +19,8 @@ Know the branch, staged files, remote, and exact publish state before claiming a
 - Start with branch and status.
 - Inspect staged diff before any commit message.
 - Never use `git add .` unless explicitly approved.
-- Never force-push or delete branches without explicit approval.
+- Never amend, delete branches, or run destructive local git operations without exact approval.
+- Bash is inspection-only until an explicit approved git action. Do not use destructive worktree mutation commands such as `git checkout`, `git restore`, `git reset`, `git clean`, or `git stash` without exact approval.
+- Remote writes follow `Remote Write Safety` in `core-principles.md`.
 - Separate staged, unstaged, untracked, and ignored files in reports.
 - For PR work, detect platform and account before suggesting a publish command.

@@ -55,6 +55,9 @@ SKILLS = {
     "scoped-fix",
     "test-strategies",
     "verification",
+    "php",
+    "android",
+    "kmm",
 }
 KNOWLEDGE = {
     "build-patterns.md",
@@ -66,6 +69,66 @@ KNOWLEDGE = {
     "test-strategies.md",
     "git-rules.md",
     "memory-system.md",
+    "php.md",
+    "android.md",
+    "kmm.md",
+}
+SAFETY_PHRASES = {
+    PLUGIN / "knowledge" / "core-principles.md": [
+        "## Rule Precedence",
+        "## Remote Write Safety",
+        "## Read-Only Shell Safety",
+        "## Secrets And Sensitive Data",
+    ],
+    PLUGIN / "knowledge" / "workflow-rules.md": [
+        "Follow `Remote Write Safety` in `core-principles.md`",
+        "## Gate Handling",
+        "Do not write secrets",
+    ],
+    PLUGIN / "knowledge" / "build-patterns.md": [
+        "Parallel dispatch is allowed only for non-overlapping file sets",
+        "If two agents may touch the same file",
+    ],
+    PLUGIN / "knowledge" / "git-rules.md": [
+        "Remote writes follow `Remote Write Safety` in `core-principles.md`",
+    ],
+    PLUGIN / "agents" / "hawkeye.md": ["Bash is for inspection only"],
+    PLUGIN / "agents" / "black-widow.md": [
+        "Bash is for inspection only",
+        "Never print or write secret values",
+    ],
+    PLUGIN / "agents" / "hulk.md": ["Bash is for inspection and verification only"],
+    PLUGIN / "agents" / "nick-fury.md": [
+        "Bash is inspection-only until an explicit approved git action",
+        "Remote writes follow `Remote Write Safety`",
+    ],
+    PLUGIN / "agents" / "captain-america.md": [
+        "Dispatch parallel editors only for non-overlapping file sets",
+    ],
+    PLUGIN / "agents" / "spider-man.md": ["If invoked directly, own only the files needed"],
+    PLUGIN / "agents" / "doctor-strange.md": ["If invoked directly, own only the files needed"],
+    PLUGIN / "agents" / "ant-man.md": ["If invoked directly, own only the files needed"],
+    PLUGIN / "agents" / "black-panther.md": ["If invoked directly, own only the files needed"],
+    PLUGIN / "agents" / "jarvis.md": ["Never write secrets"],
+    PLUGIN / "commands" / "feature.md": ["## Gate Handling", "Do not write secrets"],
+    PLUGIN / "commands" / "bugfix.md": ["## Gate Handling", "Do not write secrets"],
+    PLUGIN / "commands" / "commit.md": ["Remote writes follow `Remote Write Safety`"],
+    PLUGIN / "commands" / "pr.md": ["Remote writes follow `Remote Write Safety`"],
+    PLUGIN / "knowledge" / "php.md": [
+        "Apply only when the project uses PHP",
+        "## Clean Architecture",
+        "Dependencies point inward",
+    ],
+    PLUGIN / "knowledge" / "android.md": [
+        "Apply only when the project targets Android",
+        "## Clean Architecture",
+        "Unidirectional data flow",
+    ],
+    PLUGIN / "knowledge" / "kmm.md": [
+        "Apply only when the project has a shared Kotlin Multiplatform module",
+        "## Clean Architecture",
+        "Dependency inversion across the platform boundary",
+    ],
 }
 
 
@@ -149,6 +212,12 @@ def main() -> None:
         fail("missing hooks/session-start.sh")
     if not (session_start.stat().st_mode & 0o111):
         fail("hooks/session-start.sh is not executable")
+
+    for path, phrases in SAFETY_PHRASES.items():
+        text = path.read_text()
+        for phrase in phrases:
+            if phrase not in text:
+                fail(f"missing safety phrase {phrase!r} in {path}")
 
     forbidden_parts = [
         ("Shankar", "Kakumani"),

@@ -16,9 +16,8 @@ You are Nick Fury.
 4. Generate or use the requested commit message.
 5. Wait for approval before committing.
 6. Never add co-author attribution unless the user explicitly asks.
-7. Never amend, force-push, delete branches, create PRs/releases, deploy, publish packages, or run `git push` without explicit approval for that exact remote action in the current task.
-8. Approval to commit is not approval to push.
-9. Ask before pushing and show the exact remote, branch, upstream, account if detectable, and command.
+7. Remote writes follow `Remote Write Safety` in `core-principles.md`.
+8. Ask before pushing and show the exact remote, branch, upstream, account if detectable, and command.
 
 ## Phase 0: Orient
 
@@ -52,7 +51,7 @@ Gate: present staged scope and message. Wait for approval.
 
 Run the approved commit. If it fails because of hooks or formatting, report the failure and fix only approved issues.
 
-After commit, ask whether to push. If approved in this same task, detect upstream, show the exact push command, and push safely.
+After commit, ask whether to push. If approved in this same task under `Remote Write Safety`, detect upstream, show the exact push command, and push safely.
 
 Ask JARVIS to log the commit activity after success.
 
