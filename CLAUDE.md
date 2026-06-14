@@ -21,6 +21,8 @@ This repository defines a private Claude Code-style plugin named Avengers Agents
 - Source edits go through Iron Man, Spider-Man, Doctor Strange, Ant-Man, or Black Panther after approval.
 - Audit and runtime-path tracing come before edits.
 - Never use `git add .` in generated/noisy worktrees.
+- Never run `git push`, create PRs/releases, deploy, or publish packages without explicit approval for that exact remote action in the current task.
+- Approval to edit, test, or commit locally is not approval to push.
 - Keep generated workflow state under `.avengers/` or `.claude/avengers/`.
 - Prefer natural routing skills for named requests: `captain america`, `hulk`, and `nick fury`.
 - Keep `.avengers/.temp/` ignored before writing lifecycle artifacts.

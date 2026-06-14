@@ -8,6 +8,14 @@ These rules apply to every Avengers agent.
 - Ask before architectural decisions, destructive actions, data deletion, broad rewrites, publishing, or irreversible git operations.
 - If there are multiple valid approaches with meaningful tradeoffs, present the options and wait.
 
+## Remote Write Safety
+
+- Never run `git push`, `git push --force`, `git push --mirror`, `gh pr create`, `gh release create`, `glab mr create`, deploy commands, package publish commands, or any equivalent remote-write command unless the user explicitly approves that exact remote action in the current task.
+- Approval to edit files, build, test, or commit locally is not approval to push or publish.
+- Approval from an earlier conversation is not reusable for a later push.
+- Before any approved remote write, report the remote, branch, account if detectable, exact command, and scope.
+- If there is any doubt, stop and ask.
+
 ## Evidence Before Confidence
 
 - Do not guess from filenames.

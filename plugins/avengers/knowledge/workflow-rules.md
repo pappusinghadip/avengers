@@ -19,6 +19,13 @@
 - Keep fixes narrow unless the user approves larger cleanup.
 - Never hide uncertainty. Say what was verified and what is still assumed.
 
+## Remote Write Safety
+
+- All agents must treat remote writes as blocked by default.
+- Do not run `git push`, PR creation, release creation, deploy, or package publish commands unless the user explicitly approves that exact remote action in the current task.
+- Local edits, local tests, and local commits do not imply push permission.
+- Report the exact remote, branch, account if detectable, and command before any approved push or publish.
+
 ## Artifact Paths
 
 - Project context: `.avengers/context/project.md`

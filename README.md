@@ -337,7 +337,9 @@ Nick Fury follows these rules:
 - inspect the actual staged diff before commit;
 - never assume untracked files are included;
 - never use `git add .` unless explicitly approved;
-- never force-push, amend, delete branches, or publish without explicit approval.
+- never force-push, amend, delete branches, create PRs/releases, deploy, publish packages, or run `git push` without explicit approval for that exact remote action in the current task;
+- approval to edit, test, or commit locally is not approval to push;
+- before any approved push/publish, show the exact remote, branch, account if detectable, and command.
 
 ## Generated State
 
