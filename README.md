@@ -1,20 +1,29 @@
 # Avengers Agents
 
-Private audit-first coding agents for Claude Code and local development workflows.
+Audit-first AI coding agents for Claude Code workflows.
 
-Avengers Agents is a personal agent squad built around a simple rule: understand the real code path before changing anything. It is designed for repo audits, scoped fixes, debugging, review, testing, and safe git handoff.
+Avengers Agents is a Claude Code-style plugin that gives you a small, opinionated squad of specialist agents for real software work: repo audits, scoped fixes, debugging, code review, verification, and git-safe delivery.
 
-> Private use only. This repository uses Avengers character names as a local naming scheme and is not intended for public redistribution or marketplace publishing.
+The workflow is simple:
 
-## What This Gives You
+1. Understand the real runtime path.
+2. Plan before editing.
+3. Make scoped changes.
+4. Review and verify.
+5. Commit only what was intended.
 
-- Read-only audits before implementation.
-- Plans before non-trivial edits.
-- Scoped fixes that preserve unrelated local changes.
-- Specialist agents for frontend, backend, data, debugging, security, review, testing, and git.
-- Validation scripts to catch broken plugin wiring.
-- A Claude Code-style plugin bundle under `plugins/avengers`.
-- A Codex-compatible local scaffold manifest under `.codex-plugin`.
+> Unofficial fan-themed project. This repository is not affiliated with, sponsored by, or endorsed by Marvel, Disney, or any related rights holder.
+
+## Features
+
+- Read-only audit command for tracing real code paths.
+- Planning command for implementation notes before edits.
+- Scoped fix command for approved changes.
+- Debug command for root-cause investigations.
+- Review command with file and line findings.
+- Test command for verification, edge cases, and stress checks.
+- Commit command built around staged-diff safety.
+- Project init command for generating local context.
 
 ## Agent Squad
 
@@ -31,6 +40,84 @@ Avengers Agents is a personal agent squad built around a simple rule: understand
 | Black Panther | Data integrity, backend reliability, defensive design |
 | Nick Fury | Git, release coordination, staged diff safety, final checklist |
 
+## Installation
+
+### Option 1: Install From GitHub In Claude Code
+
+After this repository is available on GitHub:
+
+```bash
+/plugin marketplace add pappusinghadip/avengers
+/plugin install avengers-agents@avengers
+```
+
+Then use the slash commands:
+
+```text
+/avengers:audit explain the auth flow
+/avengers:plan add passkey login
+/avengers:review staged changes
+```
+
+### Option 2: Run Locally From A Clone
+
+Clone the repository:
+
+```bash
+git clone git@github.com:pappusinghadip/avengers.git
+cd avengers
+```
+
+Run Claude Code with the plugin directory:
+
+```bash
+claude --plugin-dir "$PWD/plugins/avengers"
+```
+
+For the current local workspace:
+
+```bash
+claude --plugin-dir /Users/pappusingha/Documents/MyAgent/avengers-agents/plugins/avengers
+```
+
+## Quick Start
+
+Initialize project context in any repo:
+
+```text
+/avengers:init
+```
+
+Audit before making changes:
+
+```text
+/avengers:audit why does /admin redirect to login
+```
+
+Create a plan before implementation:
+
+```text
+/avengers:plan add a manual passkey check after password login
+```
+
+Implement an approved scoped change:
+
+```text
+/avengers:fix implement the approved passkey plan
+```
+
+Review changed code:
+
+```text
+/avengers:review staged changes
+```
+
+Commit safely:
+
+```text
+/avengers:commit latest fix
+```
+
 ## Commands
 
 | Command | Purpose |
@@ -44,34 +131,50 @@ Avengers Agents is a personal agent squad built around a simple rule: understand
 | `/avengers:commit` | Staged diff review and safe commit workflow |
 | `/avengers:init` | Create project context for this workflow |
 
-## Default Workflow
+## Recommended Workflow
 
-1. Captain America receives the mission.
-2. The active runtime path is traced before conclusions.
-3. A plan is written or presented for non-trivial changes.
-4. The correct specialist implements only the approved scope.
-5. Hawkeye reviews the change.
-6. Black Widow checks security when auth, user data, file IO, shell, SQL, or permissions are involved.
-7. Hulk verifies tests, smoke checks, stress cases, and failure paths when relevant.
-8. Nick Fury handles staged diff, commit, push, and release coordination only when asked.
-
-## Local Claude Code Usage
-
-Run Claude Code with the plugin loaded directly from this repository:
-
-```bash
-claude --plugin-dir /Users/pappusingha/Documents/MyAgent/avengers-agents/plugins/avengers
-```
-
-Example prompts:
+### For New Features
 
 ```text
-/avengers:audit why this admin route redirects
-/avengers:plan add a manual passkey gate
-/avengers:debug crash after submit
-/avengers:review staged changes
-/avengers:commit latest fix
+/avengers:audit existing related feature
+/avengers:plan build the new feature
+/avengers:fix implement the approved plan
+/avengers:review changed files
+/avengers:test affected flow
+/avengers:commit feature summary
 ```
+
+### For Bugs
+
+```text
+/avengers:debug paste the error or describe the failing behavior
+/avengers:plan propose the fix
+/avengers:fix apply the approved fix
+/avengers:test verify the original bug is gone
+/avengers:review changed files
+```
+
+### For Git Handoff
+
+```text
+/avengers:review staged changes
+/avengers:commit commit message or context
+```
+
+Nick Fury is intentionally staged-diff focused. The commit workflow should not use broad staging unless explicitly requested.
+
+## How The Agents Route Work
+
+- Captain America coordinates larger work.
+- Iron Man handles complex implementation and automation.
+- Spider-Man handles frontend and user-facing flows.
+- Doctor Strange handles difficult debugging.
+- Black Panther handles backend reliability, persistence, and data safety.
+- Ant-Man handles tiny low-risk patches.
+- Hawkeye reviews code.
+- Black Widow reviews security-sensitive paths.
+- Hulk verifies edge cases, stress cases, and regressions.
+- Nick Fury handles git, release checks, and final commit hygiene.
 
 ## Repository Structure
 
@@ -100,13 +203,13 @@ avengers-agents/
 
 ## Validation
 
-Run the local structure validator:
+Run the structure validator:
 
 ```bash
 python3 scripts/validate_avengers.py
 ```
 
-Expected result:
+Expected output:
 
 ```text
 OK: Avengers Agents structure is valid
@@ -116,14 +219,31 @@ The validator checks:
 
 - all 10 agent files exist;
 - all 8 command files exist;
-- all required skills and knowledge files exist;
-- skill references in agent frontmatter resolve;
+- required skills and knowledge files exist;
+- agent skill references resolve;
 - Claude plugin versions match;
-- upstream Transformers repo identifiers are not present.
+- upstream reference identifiers are not present.
+
+## Development
+
+When editing the plugin:
+
+1. Update agent, command, skill, or knowledge files under `plugins/avengers`.
+2. Run validation.
+3. Test locally with `claude --plugin-dir "$PWD/plugins/avengers"`.
+4. Commit only intentional files.
+
+Useful commands:
+
+```bash
+python3 scripts/validate_avengers.py
+git status --short --branch
+git diff --cached --name-status
+```
 
 ## Git Safety Rules
 
-Nick Fury owns git work. The expected behavior is:
+Nick Fury follows these rules:
 
 - start with `git status --short --branch`;
 - inspect staged files with `git diff --cached --name-status`;
@@ -132,12 +252,27 @@ Nick Fury owns git work. The expected behavior is:
 - never use `git add .` unless explicitly approved;
 - never force-push, amend, delete branches, or publish without explicit approval.
 
-## Development Notes
+## Generated State
 
-- Keep the plugin private/local.
-- Keep generated task state under `.avengers/` or `.claude/avengers/`.
-- Keep `.avengers/.temp/` out of git.
-- Update both Claude plugin version files together:
-  - `.claude-plugin/marketplace.json`
-  - `plugins/avengers/.claude-plugin/plugin.json`
-- Run validation before committing prompt or metadata changes.
+Generated workflow state should stay out of normal commits:
+
+```text
+.avengers/.temp/
+.claude/avengers/.temp/
+```
+
+Project context and memory may be created by `/avengers:init` inside a target repo.
+
+## Versioning
+
+Keep these versions in sync:
+
+- `.claude-plugin/marketplace.json`
+- `plugins/avengers/.claude-plugin/plugin.json`
+- `.codex-plugin/plugin.json`
+
+Run validation after version or metadata changes.
+
+## License
+
+No open-source license has been added yet. Unless a `LICENSE` file is added, all rights are reserved by the repository owner.
