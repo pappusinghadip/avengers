@@ -17,6 +17,8 @@ The workflow is simple:
 ## Features
 
 - Read-only audit command for tracing real code paths.
+- Full feature lifecycle command for requirements, research, plan, build, review, and test.
+- Full bugfix lifecycle command for gather, investigate, fix plan, fix, and verify.
 - Planning command for implementation notes before edits.
 - Scoped fix command for approved changes.
 - Debug command for root-cause investigations.
@@ -55,6 +57,8 @@ Then use the slash commands:
 
 ```text
 /avengers:audit explain the auth flow
+/avengers:feature add passkey login
+/avengers:bugfix users cannot log in after password reset
 /avengers:plan add passkey login
 /avengers:review staged changes
 ```
@@ -100,6 +104,18 @@ Create a plan before implementation:
 /avengers:plan add a manual passkey check after password login
 ```
 
+Run a full feature lifecycle:
+
+```text
+/avengers:feature add a manual passkey check after password login
+```
+
+Run a full bugfix lifecycle:
+
+```text
+/avengers:bugfix login fails after password reset
+```
+
 Implement an approved scoped change:
 
 ```text
@@ -124,6 +140,8 @@ Commit safely:
 |---|---|
 | `/avengers:audit` | Read-only repo audit and runtime path trace |
 | `/avengers:plan` | Create an implementation plan before editing |
+| `/avengers:feature` | Requirements -> research -> plan -> build -> review -> test |
+| `/avengers:bugfix` | Gather -> investigate -> fix plan -> fix -> verify |
 | `/avengers:fix` | Implement an approved scoped change |
 | `/avengers:debug` | Root-cause debugging with approval before fixes |
 | `/avengers:review` | Code review and security-risk pass |
@@ -136,23 +154,18 @@ Commit safely:
 ### For New Features
 
 ```text
-/avengers:audit existing related feature
-/avengers:plan build the new feature
-/avengers:fix implement the approved plan
-/avengers:review changed files
-/avengers:test affected flow
+/avengers:feature build the new feature
 /avengers:commit feature summary
 ```
 
 ### For Bugs
 
 ```text
-/avengers:debug paste the error or describe the failing behavior
-/avengers:plan propose the fix
-/avengers:fix apply the approved fix
-/avengers:test verify the original bug is gone
-/avengers:review changed files
+/avengers:bugfix paste the error or describe the failing behavior
+/avengers:commit bugfix summary
 ```
+
+Use `/avengers:plan` plus `/avengers:fix` when you want to split the lifecycle manually.
 
 ### For Git Handoff
 
@@ -218,7 +231,7 @@ OK: Avengers Agents structure is valid
 The validator checks:
 
 - all 10 agent files exist;
-- all 8 command files exist;
+- all 10 command files exist;
 - required skills and knowledge files exist;
 - agent skill references resolve;
 - Claude plugin versions match;

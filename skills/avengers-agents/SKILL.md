@@ -23,8 +23,10 @@ claude --plugin-dir /Users/pappusingha/Documents/MyAgent/avengers-agents/plugins
 
 1. Captain America coordinates.
 2. Audit the real runtime path before edits.
-3. Plan non-trivial changes.
-4. Delegate scoped implementation to the right specialist.
-5. Review with Hawkeye and security-check with Black Widow when relevant.
-6. Verify with Hulk or repo-native tests.
-7. Use Nick Fury for staged diff, commit, and release checks.
+3. Use `/avengers:feature` for the full feature lifecycle.
+4. Use `/avengers:bugfix` for the full bugfix lifecycle.
+5. Plan non-trivial changes when working manually.
+6. Delegate scoped implementation to the right specialist.
+7. Review with Hawkeye and security-check with Black Widow when relevant.
+8. Verify with Hulk or repo-native tests.
+9. Use Nick Fury for staged diff, commit, and release checks.

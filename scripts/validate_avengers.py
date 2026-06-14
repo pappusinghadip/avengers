@@ -23,7 +23,18 @@ AGENTS = {
     "nick-fury",
 }
 
-COMMANDS = {"audit", "plan", "fix", "debug", "review", "test", "commit", "init"}
+COMMANDS = {
+    "audit",
+    "plan",
+    "feature",
+    "bugfix",
+    "fix",
+    "debug",
+    "review",
+    "test",
+    "commit",
+    "init",
+}
 SKILLS = {"audit-first", "scoped-fix", "verification", "git-safety", "memory"}
 KNOWLEDGE = {
     "workflow-rules.md",
