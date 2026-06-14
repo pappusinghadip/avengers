@@ -2,7 +2,7 @@
 
 Audit-first AI coding agents for Claude Code workflows.
 
-Avengers Agents is a Claude Code-style plugin that gives you a small, opinionated squad of specialist agents for real software work: repo audits, scoped fixes, debugging, code review, verification, and git-safe delivery.
+Avengers Agents is a Claude Code-style plugin that gives you a small, opinionated squad of specialist agents for real software work: repo audits, scoped fixes, debugging, research, code review, verification, PR preparation, reporting, and git-safe delivery.
 
 The workflow is simple:
 
@@ -20,12 +20,15 @@ The workflow is simple:
 - Full gated feature lifecycle command for gather, research, plan, build, review plus test, and summary.
 - Full gated bugfix lifecycle command for gather, investigate, fix plan, fix, verify, and summary.
 - Planning command for implementation notes before edits.
+- Research, explain, brainstorm, refactor, report, and PR commands.
 - Scoped fix command for approved changes.
 - Debug command for root-cause investigations.
 - Review command with file and line findings.
-- Test command for verification, edge cases, and stress checks.
+- Test command for four-angle verification: unit/component, integration, E2E/user flow, and security.
 - Commit command built around staged-diff safety.
 - Project init command for generating local context.
+- Natural routing skills for `captain america`, `hulk`, and `nick fury`.
+- JARVIS internal support for activity logs, reports, memory, and artifact housekeeping.
 
 ## Agent Squad
 
@@ -41,6 +44,12 @@ The workflow is simple:
 | Ant-Man | Small scoped fixes, surgical changes |
 | Black Panther | Data integrity, backend reliability, defensive design |
 | Nick Fury | Git, release coordination, staged diff safety, final checklist |
+
+Internal support:
+
+| Agent | Role |
+|---|---|
+| JARVIS | Activity logging, reports, memory writes, artifact housekeeping |
 
 ## Installation
 
@@ -59,8 +68,18 @@ Then use the slash commands:
 /avengers:audit explain the auth flow
 /avengers:feature add passkey login
 /avengers:bugfix users cannot log in after password reset
+/avengers:research auth flow
+/avengers:explain checkout module
 /avengers:plan add passkey login
 /avengers:review staged changes
+```
+
+You can also use natural routing in Claude Code:
+
+```text
+captain america, build a search bar
+hulk, test the auth flow
+nick fury, prepare the commit
 ```
 
 ### Option 2: Run Locally From A Clone
@@ -128,6 +147,12 @@ Review changed code:
 /avengers:review staged changes
 ```
 
+Prepare a PR:
+
+```text
+/avengers:pr target main
+```
+
 Commit safely:
 
 ```text
@@ -139,19 +164,25 @@ Commit safely:
 | Command | Purpose |
 |---|---|
 | `/avengers:audit` | Read-only repo audit and runtime path trace |
+| `/avengers:brainstorm` | Compare options and tradeoffs before building |
 | `/avengers:plan` | Create an implementation plan before editing |
 | `/avengers:feature` | Gather -> research -> plan -> build -> review plus test -> summary |
 | `/avengers:bugfix` | Gather -> investigate -> fix plan -> fix -> verify -> summary |
 | `/avengers:fix` | Implement an approved scoped change |
 | `/avengers:debug` | Root-cause debugging with approval before fixes |
+| `/avengers:explain` | Layered codebase or feature explanation |
+| `/avengers:research` | Deep read-only research from multiple angles |
+| `/avengers:refactor` | Review-led refactoring with approval gate |
 | `/avengers:review` | Code review and security-risk pass |
-| `/avengers:test` | Verification, tests, stress, and edge checks |
+| `/avengers:test` | Four-angle verification, stress, and edge checks |
 | `/avengers:commit` | Staged diff review and safe commit workflow |
+| `/avengers:pr` | PR preparation with diff review and approval gate |
+| `/avengers:report` | Activity summary from reports, memory, and artifacts |
 | `/avengers:init` | Create project context for this workflow |
 
 ## Gated Lifecycles
 
-Lifecycle state is written under `.avengers/.temp/`. If context is compacted or a terminal closes, restart by reading the task `status.md` and phase files.
+Lifecycle state is written under `.avengers/.temp/`. If context is compacted or a terminal closes, restart by reading the task `status.md` and phase files. The commands check whether `.avengers/.temp/` is gitignored before writing artifacts.
 
 ### Feature Lifecycle
 
@@ -165,7 +196,7 @@ Phase 2  Plan           Architecture decisions, chunks, risks, and verification.
           GATE          Approve the plan before source edits.
 Phase 3  Build          Avengers execute per the approved plan.
           GATE          Review what was built.
-Phase 4  Review + Test  Hawkeye reviews. Black Widow audits sensitive paths. Hulk verifies.
+Phase 4  Review + Test  Hawkeye reviews. Black Widow audits sensitive paths. Hulk verifies from four angles.
           GATE          Decide which findings to fix, defer, or accept.
 Phase 5  Summary        What was built, decisions made, test result, and reusable notes.
 ```
@@ -186,6 +217,8 @@ Phase 4  Verify         Hawkeye reviews. Black Widow audits sensitive paths. Hul
 Phase 5  Summary        Root cause, fix, verification, and reusable decision rule.
 ```
 
+JARVIS can log lifecycle output to `.avengers/reports/activity.log` and save reusable decision rules to `.avengers/memory/`.
+
 ## Recommended Workflow
 
 ### For New Features
@@ -202,7 +235,7 @@ Phase 5  Summary        Root cause, fix, verification, and reusable decision rul
 /avengers:commit bugfix summary
 ```
 
-Use `/avengers:plan` plus `/avengers:fix` when you want to split the lifecycle manually.
+Use `/avengers:plan` plus `/avengers:fix` when you want to split the lifecycle manually. Use `/avengers:research`, `/avengers:explain`, or `/avengers:brainstorm` when you want understanding before any plan.
 
 ### For Git Handoff
 
@@ -225,6 +258,7 @@ Nick Fury is intentionally staged-diff focused. The commit workflow should not u
 - Black Widow reviews security-sensitive paths.
 - Hulk verifies edge cases, stress cases, and regressions.
 - Nick Fury handles git, release checks, and final commit hygiene.
+- JARVIS quietly handles `.avengers/` reports, memory, and activity logs.
 
 ## Repository Structure
 
@@ -240,6 +274,7 @@ avengers-agents/
 │       │   └── plugin.json
 │       ├── agents/
 │       ├── commands/
+│       ├── hooks/
 │       ├── knowledge/
 │       └── skills/
 ├── scripts/
@@ -267,8 +302,10 @@ OK: Avengers Agents structure is valid
 
 The validator checks:
 
-- all 10 agent files exist;
-- all 10 command files exist;
+- all 10 public agent files and internal JARVIS support agent exist;
+- all command files exist;
+- routing and shared-rule skills exist;
+- hook files exist;
 - required skills and knowledge files exist;
 - agent skill references resolve;
 - Claude plugin versions match;

@@ -16,14 +16,27 @@ Gather -> Investigate -> Fix Plan -> Fix -> Verify -> Summary
 
 1. Every phase writes to `.avengers/.temp/bugfix/[short-name]/`.
 2. If context is compacted or the terminal closes, resume by reading `status.md` and the phase files first.
-3. Reproduce or trace the symptom before proposing a fix.
-4. Do not edit source code before the fix plan is approved, unless autonomous execution was explicitly requested.
-5. Doctor Strange leads root-cause investigation.
-6. Use Ant-Man for tiny scoped fixes, Iron Man for broader code fixes, Spider-Man for UI fixes, and Black Panther for data/backend reliability fixes.
-7. Use Hawkeye for review.
-8. Use Black Widow for auth, permissions, data exposure, shell, SQL, uploads, or secrets.
-9. Use Hulk to verify the original bug is gone.
-10. Preserve unrelated local edits.
+3. Check whether `.avengers/.temp/` is gitignored before creating artifacts.
+4. Reproduce or trace the symptom before proposing a fix.
+5. Do not edit source code before the fix plan is approved, unless autonomous execution was explicitly requested.
+6. Doctor Strange leads root-cause investigation.
+7. Use Ant-Man for tiny scoped fixes, Iron Man for broader code fixes, Spider-Man for UI fixes, and Black Panther for data/backend reliability fixes.
+8. Use Hawkeye for review.
+9. Use Black Widow for auth, permissions, data exposure, shell, SQL, uploads, or secrets.
+10. Use Hulk to verify the original bug is gone from four angles when relevant.
+11. Use JARVIS for activity logging and memory writes.
+12. Preserve unrelated local edits.
+
+## Pre-flight
+
+Before creating artifacts:
+
+1. Read `.gitignore` if it exists.
+2. If `.avengers/.temp/`, `.avengers/`, or an equivalent ignore rule is missing, ask:
+   "The `.avengers/.temp/` directory contains temporary workflow artifacts. Can I add `.avengers/.temp/` to `.gitignore`?"
+3. If approved, append `.avengers/.temp/`.
+4. If declined, continue but remind the user these artifacts should not be committed.
+5. Check `.avengers/.temp/bugfix/` for a matching in-progress `status.md`; ask whether to resume or start fresh.
 
 ## Artifact Files
 
@@ -41,6 +54,18 @@ Create or update:
 ```
 
 Keep `status.md` current with the active phase, gate status, user decisions, and next action.
+
+Use this schema:
+
+```text
+phase: [0-5]
+status: [in_progress | waiting_for_gate | complete]
+gate: [none | waiting | approved | skipped]
+summary: [one line]
+next: [next action]
+```
+
+When spawning specialists, instruct them to write detailed findings to the phase artifact and return only a 1-3 line summary.
 
 ## Phase 0: Gather
 
@@ -117,6 +142,7 @@ Ask Hulk to verify:
 - relevant tests or smoke checks pass;
 - obvious regression paths still work;
 - edge/failure cases behave correctly.
+- security-sensitive behavior is checked by Black Widow when relevant.
 
 Save results to `04-verification.md`. If verification fails, attempt an approved targeted fix. Stop after two failed fix attempts and escalate to the user.
 
@@ -131,6 +157,8 @@ Write `05-summary.md` with:
 - verification result;
 - unresolved risks;
 - reusable decision rule or project memory note.
+
+Ask JARVIS to append a factual activity entry to `.avengers/reports/activity.log`. Ask JARVIS to write only reusable decision rules to `.avengers/memory/`.
 
 ## Final Response
 

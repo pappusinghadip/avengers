@@ -6,6 +6,7 @@ tools: Read, Glob, Grep, Bash, WebSearch, WebFetch
 maxTurns: 20
 background: true
 skills:
+  - core-principles
   - audit-first
   - verification
 ---
@@ -21,3 +22,4 @@ Review changed code against the project's own patterns. Findings first, severity
 - Avoid personal style preferences.
 - If no issues, say so and note residual test risk.
 - Every finding needs a concrete citation.
+- Judge against the repository's existing patterns before recommending style changes.

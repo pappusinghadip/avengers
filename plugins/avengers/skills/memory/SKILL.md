@@ -6,6 +6,8 @@ user-invocable: false
 
 ## Memory Rules
 
+@${CLAUDE_PLUGIN_ROOT}/knowledge/memory-system.md
+
 - Store rules that change future behavior.
 - Do not store facts discoverable from current code.
 - Prefer `.avengers/memory/long-term/` for stable project rules.

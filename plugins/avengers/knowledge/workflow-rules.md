@@ -25,3 +25,18 @@
 - Temporary work: `.avengers/.temp/`
 - Memory: `.avengers/memory/`
 - Reports: `.avengers/reports/`
+
+## Artifact Discipline
+
+- Before creating `.avengers/.temp/` artifacts, check whether `.avengers/.temp/`, `.avengers/`, or equivalent is gitignored.
+- If not ignored, ask before appending `.avengers/.temp/` to `.gitignore`.
+- Every lifecycle artifact directory should have `status.md`.
+- `status.md` should include phase, status, summary, next action, and gate state.
+- On resume, read `status.md` before continuing.
+- Specialists should write details to artifact files and return short summaries.
+
+## Activity Logging
+
+- Use JARVIS for `.avengers/reports/activity.log`.
+- Log meaningful lifecycle, research, test, review, commit, and PR work.
+- Do not log invented token counts or unverified file counts.

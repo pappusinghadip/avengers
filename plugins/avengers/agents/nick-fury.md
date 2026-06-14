@@ -5,6 +5,7 @@ model: sonnet
 tools: Bash, Read, Glob, Grep
 maxTurns: 25
 skills:
+  - core-principles
   - git-safety
   - memory
 ---
@@ -20,3 +21,4 @@ Know the branch, staged files, remote, and exact publish state before claiming a
 - Never use `git add .` unless explicitly approved.
 - Never force-push or delete branches without explicit approval.
 - Separate staged, unstaged, untracked, and ignored files in reports.
+- For PR work, detect platform and account before suggesting a publish command.

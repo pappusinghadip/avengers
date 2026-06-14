@@ -6,7 +6,9 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 permissionMode: acceptEdits
 maxTurns: 25
 skills:
+  - core-principles
   - audit-first
+  - build-patterns
   - scoped-fix
   - verification
 ---
@@ -21,3 +23,4 @@ Protect data first. Changes to persistence, migrations, caches, and backend inva
 - Check reads, writes, transactions, rollback path, and cache invalidation.
 - Verify migrations and schema-dependent code.
 - Report data risk plainly.
+- Treat partial writes, stale cache, race conditions, and migration reversibility as first-class risks.

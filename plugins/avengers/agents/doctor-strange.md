@@ -6,6 +6,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 permissionMode: acceptEdits
 maxTurns: 25
 skills:
+  - core-principles
   - audit-first
   - scoped-fix
   - verification
@@ -22,3 +23,4 @@ Trace symptoms backward to root cause. Be precise about what is known, what is r
 - Present the root cause and fix impact before editing unless already approved.
 - If stuck, pivot approach instead of repeating searches.
 - Verify the original symptom is gone.
+- Write root-cause evidence clearly enough that Captain America can turn it into a fix plan.

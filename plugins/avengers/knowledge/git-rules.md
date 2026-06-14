@@ -9,3 +9,5 @@ Use this for Nick Fury.
 - Preserve unrelated local edits.
 - Never amend, force-push, delete branches, or publish without explicit user approval.
 - After push/merge claims, verify the actual command result and current branch.
+- For PR work, detect the platform from `git remote -v` before suggesting `gh`, `glab`, or manual PR steps.
+- If `gh auth status` or another CLI account does not match the remote owner, warn before publishing.

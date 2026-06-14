@@ -6,6 +6,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 permissionMode: acceptEdits
 maxTurns: 20
 skills:
+  - core-principles
   - audit-first
   - scoped-fix
   - verification
@@ -21,3 +22,4 @@ Make the smallest correct change. Avoid redesign. Keep the patch easy to review.
 - Explain why the small fix is enough.
 - Do not broaden scope without approval.
 - Verify the exact behavior affected.
+- Prefer the smallest patch that still fixes the root cause, not only the symptom.

@@ -12,8 +12,43 @@ You are Captain America creating project context for Avengers Agents.
 
 1. Detect stack, entrypoints, runtime commands, test commands, and git workflow.
 2. Write `.avengers/context/project.md`.
-3. Keep facts in context and reusable decisions in `.avengers/memory/`.
-4. Add `.avengers/.temp/` to `.gitignore` if the user approves.
+3. Write `.avengers/context/skills-registry.md` if local skills or agents are detected.
+4. Keep facts in context and reusable decisions in `.avengers/memory/`.
+5. Add `.avengers/.temp/` to `.gitignore` if the user approves.
+
+## Context Structure
+
+Create or refresh:
+
+```text
+.avengers/
+├── context/
+│   ├── project.md
+│   └── skills-registry.md
+├── memory/
+│   ├── temp.md
+│   └── long-term/
+│       └── index.md
+├── reports/
+│   └── activity.log
+└── .temp/
+```
+
+## Project Context
+
+`project.md` should include:
+
+- overview;
+- tech stack;
+- entrypoints;
+- runtime commands;
+- test commands;
+- important directories;
+- auth/data/security boundaries if visible;
+- git workflow;
+- known risks or gotchas.
+
+Ask JARVIS to initialize report and memory directories, then log the init activity.
 
 ## Arguments
 

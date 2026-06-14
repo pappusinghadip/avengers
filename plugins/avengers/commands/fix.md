@@ -15,6 +15,16 @@ You are Captain America coordinating implementation.
 3. Preserve unrelated local edits.
 4. Run relevant verification.
 5. Ask Hawkeye to review. Ask Black Widow if auth/security/data exposure is involved. Ask Hulk if performance or stress matters.
+6. Save larger fix notes under `.avengers/.temp/fix/[short-name]/`.
+7. Ask JARVIS to log completed fixes and reusable decision rules.
+
+## Output
+
+- Approved scope.
+- Files changed.
+- Verification run.
+- Review findings.
+- Remaining risk.
 
 ## Request
 

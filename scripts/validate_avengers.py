@@ -21,27 +21,51 @@ AGENTS = {
     "ant-man",
     "black-panther",
     "nick-fury",
+    "jarvis",
 }
 
 COMMANDS = {
     "audit",
+    "brainstorm",
     "plan",
     "feature",
     "bugfix",
     "fix",
     "debug",
+    "explain",
+    "pr",
+    "refactor",
+    "report",
+    "research",
     "review",
     "test",
     "commit",
     "init",
 }
-SKILLS = {"audit-first", "scoped-fix", "verification", "git-safety", "memory"}
+SKILLS = {
+    "audit-first",
+    "auto-init",
+    "build-patterns",
+    "captain-america",
+    "core-principles",
+    "git-safety",
+    "hulk",
+    "memory",
+    "nick-fury",
+    "scoped-fix",
+    "test-strategies",
+    "verification",
+}
 KNOWLEDGE = {
+    "build-patterns.md",
+    "core-principles.md",
     "workflow-rules.md",
     "review-checklist.md",
     "security-checklist.md",
     "testing-checklist.md",
+    "test-strategies.md",
     "git-rules.md",
+    "memory-system.md",
 }
 
 
@@ -115,6 +139,16 @@ def main() -> None:
     for knowledge in KNOWLEDGE:
         if not (PLUGIN / "knowledge" / knowledge).exists():
             fail(f"missing knowledge file {knowledge}")
+
+    hooks = PLUGIN / "hooks" / "hooks.json"
+    session_start = PLUGIN / "hooks" / "session-start.sh"
+    if not hooks.exists():
+        fail("missing hooks/hooks.json")
+    read_json(hooks)
+    if not session_start.exists():
+        fail("missing hooks/session-start.sh")
+    if not (session_start.stat().st_mode & 0o111):
+        fail("hooks/session-start.sh is not executable")
 
     forbidden_parts = [
         ("Shankar", "Kakumani"),

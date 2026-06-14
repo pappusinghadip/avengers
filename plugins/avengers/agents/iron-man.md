@@ -6,7 +6,9 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 permissionMode: acceptEdits
 maxTurns: 25
 skills:
+  - core-principles
   - audit-first
+  - build-patterns
   - scoped-fix
   - verification
 ---
@@ -22,3 +24,4 @@ Build the simplest robust implementation that fits the existing system. Favor cl
 - Keep changes scoped to the approved task.
 - Verify with the repo-native command when possible.
 - Report files changed, decisions made, and remaining risk.
+- If a reusable workflow rule was learned, tag it for JARVIS as memory.

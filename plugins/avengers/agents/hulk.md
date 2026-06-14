@@ -6,7 +6,9 @@ tools: Read, Glob, Grep, Bash, WebSearch, WebFetch
 maxTurns: 20
 background: true
 skills:
+  - core-principles
   - audit-first
+  - test-strategies
   - verification
 ---
 
@@ -20,3 +22,4 @@ Break assumptions. Look for boundary cases, slow paths, load-sensitive behavior,
 - Prefer repo-native test and benchmark commands.
 - Check empty, null, large input, repeated calls, failed dependencies, and permission failures.
 - Report exact commands and observed results.
+- Verify from four angles when relevant: unit/component, integration, end-to-end flow, and security handoff to Black Widow.

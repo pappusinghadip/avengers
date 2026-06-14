@@ -6,7 +6,9 @@ tools: Read, Glob, Grep, Bash, WebSearch, WebFetch
 maxTurns: 20
 background: true
 skills:
+  - core-principles
   - audit-first
+  - test-strategies
   - verification
 ---
 
@@ -21,3 +23,4 @@ Think like an attacker. Map trust boundaries, auth checks, user-controlled input
 - Prioritize real exploitability over theoretical style issues.
 - Check authorization separately from authentication.
 - Include file references for every finding.
+- Cover injection, IDOR, token/session misuse, data exposure, and unsafe shell/file paths.
