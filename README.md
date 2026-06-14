@@ -17,8 +17,8 @@ The workflow is simple:
 ## Features
 
 - Read-only audit command for tracing real code paths.
-- Full feature lifecycle command for requirements, research, plan, build, review, and test.
-- Full bugfix lifecycle command for gather, investigate, fix plan, fix, and verify.
+- Full gated feature lifecycle command for gather, research, plan, build, review plus test, and summary.
+- Full gated bugfix lifecycle command for gather, investigate, fix plan, fix, verify, and summary.
 - Planning command for implementation notes before edits.
 - Scoped fix command for approved changes.
 - Debug command for root-cause investigations.
@@ -140,14 +140,51 @@ Commit safely:
 |---|---|
 | `/avengers:audit` | Read-only repo audit and runtime path trace |
 | `/avengers:plan` | Create an implementation plan before editing |
-| `/avengers:feature` | Requirements -> research -> plan -> build -> review -> test |
-| `/avengers:bugfix` | Gather -> investigate -> fix plan -> fix -> verify |
+| `/avengers:feature` | Gather -> research -> plan -> build -> review plus test -> summary |
+| `/avengers:bugfix` | Gather -> investigate -> fix plan -> fix -> verify -> summary |
 | `/avengers:fix` | Implement an approved scoped change |
 | `/avengers:debug` | Root-cause debugging with approval before fixes |
 | `/avengers:review` | Code review and security-risk pass |
 | `/avengers:test` | Verification, tests, stress, and edge checks |
 | `/avengers:commit` | Staged diff review and safe commit workflow |
 | `/avengers:init` | Create project context for this workflow |
+
+## Gated Lifecycles
+
+Lifecycle state is written under `.avengers/.temp/`. If context is compacted or a terminal closes, restart by reading the task `status.md` and phase files.
+
+### Feature Lifecycle
+
+```text
+/avengers:feature build a search bar
+
+Phase 0  Gather         Requirements. Definition of done. Existing resources.
+Phase 1  Research       Avengers explore the codebase from multiple angles in parallel.
+          GATE          Confirm understanding before planning.
+Phase 2  Plan           Architecture decisions, chunks, risks, and verification.
+          GATE          Approve the plan before source edits.
+Phase 3  Build          Avengers execute per the approved plan.
+          GATE          Review what was built.
+Phase 4  Review + Test  Hawkeye reviews. Black Widow audits sensitive paths. Hulk verifies.
+          GATE          Decide which findings to fix, defer, or accept.
+Phase 5  Summary        What was built, decisions made, test result, and reusable notes.
+```
+
+### Bugfix Lifecycle
+
+```text
+/avengers:bugfix users cannot log in after SSO
+
+Phase 0  Gather         Bug details, logs, screenshots, impact, and timeline.
+Phase 1  Investigate    Doctor Strange traces symptoms to root cause.
+          GATE          Confirm the root cause before any fix is attempted.
+Phase 2  Fix Plan       Proposed fix, blast radius, rollback, and verification.
+          GATE          Approve the approach before source edits.
+Phase 3  Fix            The right Avenger executes the fix.
+          GATE          Review the fix.
+Phase 4  Verify         Hawkeye reviews. Black Widow audits sensitive paths. Hulk confirms the bug is gone.
+Phase 5  Summary        Root cause, fix, verification, and reusable decision rule.
+```
 
 ## Recommended Workflow
 

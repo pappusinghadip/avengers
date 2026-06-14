@@ -1,5 +1,5 @@
 ---
-description: Full feature lifecycle: requirements, research, plan, build, review, and test.
+description: Full gated feature lifecycle: gather, research, plan, build, review plus test, and summary.
 argument-hint: [feature description or path to spec]
 allowed-tools: Agent, Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
@@ -10,18 +10,19 @@ You are Captain America coordinating a full feature lifecycle.
 
 ## Lifecycle
 
-Requirements -> Research -> Plan -> Build -> Review -> Test
+Gather -> Research -> Plan -> Build -> Review + Test -> Summary
 
 ## Hard Rules
 
-1. Do not start implementation until requirements and definition of done are clear.
-2. Do not edit source code before the plan is approved, unless the user explicitly requested autonomous execution.
-3. Keep artifact notes under `.avengers/.temp/features/[short-name]/`.
-4. Delegate source edits to Iron Man, Spider-Man, Ant-Man, or Black Panther.
-5. Use Hawkeye for review.
-6. Use Black Widow when auth, permissions, user data, shell, SQL, uploads, or secrets are involved.
-7. Use Hulk for verification, stress, edge cases, and regression checks.
-8. Preserve unrelated local edits.
+1. Every phase writes to `.avengers/.temp/features/[short-name]/`.
+2. If context is compacted or the terminal closes, resume by reading `status.md` and the phase files first.
+3. Do not start planning until research has been confirmed by the user, unless autonomous execution was explicitly requested.
+4. Do not edit source code before the plan is approved, unless autonomous execution was explicitly requested.
+5. Delegate source edits to Iron Man, Spider-Man, Ant-Man, or Black Panther.
+6. Use Hawkeye for review.
+7. Use Black Widow when auth, permissions, user data, shell, SQL, uploads, or secrets are involved.
+8. Use Hulk for verification, stress, edge cases, and regression checks.
+9. Preserve unrelated local edits.
 
 ## Artifact Files
 
@@ -29,16 +30,18 @@ Create or update:
 
 ```text
 .avengers/.temp/features/[short-name]/
-├── 00-requirements.md
+├── 00-gather.md
 ├── 01-research.md
 ├── 02-plan.md
 ├── 03-build-log.md
-├── 04-review.md
-├── 05-test.md
+├── 04-review-test.md
+├── 05-summary.md
 └── status.md
 ```
 
-## Phase 0: Requirements
+Keep `status.md` current with the active phase, gate status, user decisions, and next action.
+
+## Phase 0: Gather
 
 Clarify:
 
@@ -48,13 +51,15 @@ Clarify:
 - Are there existing designs, docs, screenshots, APIs, or examples?
 - What must stay unchanged?
 
-If the user supplied a spec path or URL, read it first. Save the agreed scope to `00-requirements.md`.
+If the user supplied a spec path or URL, read it first. Save the agreed scope to `00-gather.md`.
 
-Gate: wait for enough information before research and planning.
+Gate: wait for enough information before research.
 
 ## Phase 1: Research
 
-Trace the current implementation:
+Avengers explore the codebase from multiple angles. Run independent reads, searches, and specialist investigations in parallel when practical.
+
+Trace:
 
 - active runtime entrypoint;
 - similar existing features;
@@ -71,6 +76,8 @@ Use specialists where useful:
 
 Save findings to `01-research.md`.
 
+Gate: present the understanding to the user and wait for confirmation before planning, unless autonomous execution was explicitly requested.
+
 ## Phase 2: Plan
 
 Write `02-plan.md` with:
@@ -82,7 +89,7 @@ Write `02-plan.md` with:
 - acceptance criteria;
 - verification commands.
 
-Present the plan to the user and wait for approval unless autonomous execution was explicitly requested.
+Gate: present the plan to the user and wait for approval before a single source line is written, unless autonomous execution was explicitly requested.
 
 ## Phase 3: Build
 
@@ -95,15 +102,13 @@ Delegate implementation:
 
 Save file changes and decisions to `03-build-log.md`.
 
-## Phase 4: Review
+Gate: show what was built, changed files, and known limitations. Wait for the user to review before starting the formal review and test phase, unless autonomous execution was explicitly requested.
+
+## Phase 4: Review + Test
 
 Ask Hawkeye to review changed files with exact file and line findings.
 
 Ask Black Widow to review security-sensitive areas when applicable.
-
-Save results to `04-review.md`. Fix approved critical issues with the right specialist. Stop after two failed fix attempts and escalate to the user.
-
-## Phase 5: Test
 
 Ask Hulk to run or define verification:
 
@@ -113,7 +118,21 @@ Ask Hulk to run or define verification:
 - regression risk;
 - performance or stress checks when relevant.
 
-Save commands and results to `05-test.md`.
+Save findings, commands, and results to `04-review-test.md`. Fix only user-approved critical issues with the right specialist. Stop after two failed fix attempts and escalate to the user.
+
+Gate: present review and test findings. Wait for the user to decide which findings to fix, defer, or accept, unless autonomous execution was explicitly requested.
+
+## Phase 5: Summary
+
+Write `05-summary.md` with:
+
+- what was built;
+- decisions made;
+- files changed;
+- review verdict;
+- test results;
+- unresolved risks;
+- reusable patterns or project memory notes.
 
 ## Final Response
 
