@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "avengers-agents",
+  "description": "Private audit-first Avengers agent workflow.",
+  "owner": {
+    "name": "Pappu Singha"
+  },
+  "plugins": [
+    {
+      "name": "avengers",
+      "description": "Private audit-first engineering agents.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Pappu Singha"
+      },
+      "source": "./plugins/avengers",
+      "category": "development"
+    }
+  ]
+}
