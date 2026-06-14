@@ -48,7 +48,7 @@ After this repository is available on GitHub:
 
 ```bash
 /plugin marketplace add pappusinghadip/avengers
-/plugin install avengers-agents@avengers
+/plugin install avengers@avengers-agents
 ```
 
 Then use the slash commands:
