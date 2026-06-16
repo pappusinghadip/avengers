@@ -58,6 +58,7 @@ SKILLS = {
     "php",
     "android",
     "kmm",
+    "design-routing",
 }
 KNOWLEDGE = {
     "build-patterns.md",
@@ -72,6 +73,7 @@ KNOWLEDGE = {
     "php.md",
     "android.md",
     "kmm.md",
+    "design-routing.md",
 }
 SAFETY_PHRASES = {
     PLUGIN / "knowledge" / "core-principles.md": [
@@ -104,8 +106,12 @@ SAFETY_PHRASES = {
     ],
     PLUGIN / "agents" / "captain-america.md": [
         "Dispatch parallel editors only for non-overlapping file sets",
+        "consult `design-routing`",
     ],
-    PLUGIN / "agents" / "spider-man.md": ["If invoked directly, own only the files needed"],
+    PLUGIN / "agents" / "spider-man.md": [
+        "If invoked directly, own only the files needed",
+        "consult `design-routing`",
+    ],
     PLUGIN / "agents" / "doctor-strange.md": ["If invoked directly, own only the files needed"],
     PLUGIN / "agents" / "ant-man.md": ["If invoked directly, own only the files needed"],
     PLUGIN / "agents" / "black-panther.md": ["If invoked directly, own only the files needed"],
@@ -128,6 +134,10 @@ SAFETY_PHRASES = {
         "Apply only when the project has a shared Kotlin Multiplatform module",
         "## Clean Architecture",
         "Dependency inversion across the platform boundary",
+    ],
+    PLUGIN / "knowledge" / "design-routing.md": [
+        "## Routing Matrix",
+        "Hand-Build Principles",
     ],
 }
 
