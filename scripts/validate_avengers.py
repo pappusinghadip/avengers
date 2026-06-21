@@ -41,6 +41,7 @@ COMMANDS = {
     "test",
     "commit",
     "init",
+    "handoff",
 }
 SKILLS = {
     "audit-first",
@@ -120,6 +121,10 @@ SAFETY_PHRASES = {
     PLUGIN / "commands" / "bugfix.md": ["## Gate Handling", "Do not write secrets"],
     PLUGIN / "commands" / "commit.md": ["Remote writes follow `Remote Write Safety`"],
     PLUGIN / "commands" / "pr.md": ["Remote writes follow `Remote Write Safety`"],
+    PLUGIN / "commands" / "handoff.md": [
+        "Redact secrets",
+        "Do not edit source code",
+    ],
     PLUGIN / "knowledge" / "php.md": [
         "Apply only when the project uses PHP",
         "## Clean Architecture",

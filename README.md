@@ -27,6 +27,7 @@ The workflow is simple:
 - Test command for four-angle verification: unit/component, integration, E2E/user flow, and security.
 - Commit command built around staged-diff safety.
 - Project init command for generating local context.
+- Handoff command that compacts the conversation into a resume document for a fresh session.
 - Natural routing skills for `captain america`, `hulk`, and `nick fury`.
 - JARVIS internal support for activity logs, reports, memory, and artifact housekeeping.
 
@@ -179,6 +180,7 @@ Commit safely:
 | `/avengers:pr` | PR preparation with diff review and approval gate |
 | `/avengers:report` | Activity summary from reports, memory, and artifacts |
 | `/avengers:init` | Create project context for this workflow |
+| `/avengers:handoff` | Compact the conversation into a handoff doc to resume in a fresh session |
 
 ## Gated Lifecycles
 
